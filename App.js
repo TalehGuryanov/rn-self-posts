@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { useState, useCallback, useEffect } from "react";
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import {AppNavigation} from "./src/navigation/AppNavigation";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -37,10 +38,15 @@ export default function App() {
   }
   
   return (
-    <View onLayout={onLayoutRootView}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View onLayout={onLayoutRootView} style={styles.container}>
+      <AppNavigation/>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  }
+})
 
