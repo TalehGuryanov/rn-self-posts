@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "28620185-7fb8-45d4-aeb6-2b75404fbf25"
+      }
+    },
+    "owner": "taleh"
   }
 }
