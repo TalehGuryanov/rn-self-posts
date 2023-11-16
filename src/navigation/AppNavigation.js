@@ -13,27 +13,27 @@ const Stack = createStackNavigator();
 export const AppNavigation = () => {
   return  (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Main">
+        <Stack.Navigator initialRouteName="Main" screenOptions={{headerStyle: styles.header, headerTintColor: "#fff"}}>
           <Stack.Screen
               initialRouteName="Main"
               name="Main"
               component={MainScreen}
-              options={{title: "Main", headerStyle: styles.header, headerTintColor: "#fff"}}
+              options={{title: "Main"}}
           />
           <Stack.Screen
               name="About"
               component={AboutScreen}
-              options={{title: "About", headerStyle: styles.header}}
+              options={{title: "About"}}
           />
           <Stack.Screen
               name="Booked"
               component={BookedScreen}
-              options={{title: "Booked", headerStyle: styles.header}}
+              options={{title: "Booked"}}
           />
           <Stack.Screen
               name="Post"
               component={PostScreen}
-              options={{title: "Post", headerStyle: styles.header}}
+              options={({ route }) => ({ title: ` Post ${route.params.postId}` })}
           />
         </Stack.Navigator>
       </NavigationContainer>
