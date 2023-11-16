@@ -4,7 +4,6 @@ import {MainScreen} from "../screens/MainScreen";
 import {AboutScreen} from "../screens/AboutScreen";
 import {BookedScreen} from "../screens/BookedScreen";
 import {PostScreen} from "../screens/PostScreen";
-import {StyleSheet} from 'react-native';
 import {THEME} from "../theme";
 
 const Stack = createStackNavigator();
@@ -13,7 +12,7 @@ const Stack = createStackNavigator();
 export const AppNavigation = () => {
   return  (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Main" screenOptions={{headerStyle: styles.header, headerTintColor: "#fff"}}>
+        <Stack.Navigator initialRouteName="Main" screenOptions={headerStyle}>
           <Stack.Screen
               initialRouteName="Main"
               name="Main"
@@ -40,8 +39,13 @@ export const AppNavigation = () => {
   )
 }
 
-const styles = StyleSheet.create({
-  header: {
+const headerStyle = {
+  headerStyle: {
     backgroundColor: THEME.MAIN_COLOR,
-  }
-});
+  },
+  headerTintColor: '#fff',
+  headerTitleAlign: 'center',
+  headerLeftContainerStyle: {
+    paddingLeft: 15,
+  },
+}

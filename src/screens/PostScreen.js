@@ -1,10 +1,17 @@
 import { Text, View, StyleSheet, Image, Button, ScrollView, Alert } from 'react-native';
 import {DATA} from "../data";
 import {THEME} from "../theme";
+import React, {useLayoutEffect, useCallback} from "react";
+import {HeaderButtons, Item} from "react-navigation-header-buttons";
+import {AppHeaderIcon} from "../components/AppHeaderIcon";
 
-export const PostScreen = ({ route }) => {
+export const PostScreen = ({ route, navigation }) => {
   const {postId} = route.params;
-  const post = DATA.find(p => p.id === postId)
+  
+  const findPost = useCallback(() => {
+    return DATA.find(p => p.id === postId)
+  }, [postId]);
+  const post = findPost();
   
   const removeHandler = () => {
     Alert.alert(
@@ -20,6 +27,17 @@ export const PostScreen = ({ route }) => {
         { cancelable: false }
     )
   }
+  
+  useLayoutEffect(() => {
+    const isBooker = post.booked;
+    const iconName = isBooker ? 'ios-star' : 'ios-star-outline'
+    navigation.setOptions({
+      headerRight: () => (
+          <HeaderButtons HeaderButtonComponent={AppHeaderIcon} style={{marginHorizontal: 0}}>
+            <Item title="Take photo" iconName={iconName} onPress={() => console.log('booked')} style={{marginHorizontal: 0}}/>
+          </HeaderButtons>),
+    });
+  }, [])
   
   return (
       <ScrollView style={styles.center}>

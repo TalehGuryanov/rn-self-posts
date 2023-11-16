@@ -28,6 +28,6 @@ export const DATA = [
     img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfiTp1b0EqFyaW8mo3oKBupk7VAL4n96VRQA&usqp=CAU',
     text: 'Awesome text 5',
     date: new Date().toJSON(),
-    booked: false
+    booked: true
   }
 ]
