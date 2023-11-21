@@ -1,8 +1,9 @@
-import { Text, View, StyleSheet } from 'react-native';
-import { useState, useCallback, useEffect } from "react";
+import { View, StyleSheet } from 'react-native';
+import { useCallback } from "react";
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import {AppNavigation} from "./src/navigation/AppNavigation";
+import 'react-native-gesture-handler';
 
 SplashScreen.preventAutoHideAsync();
 
