@@ -1,16 +1,19 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import {MainScreen} from "../screens/MainScreen";
-import {AboutScreen} from "../screens/AboutScreen";
 import {BookedScreen} from "../screens/BookedScreen";
 import {PostScreen} from "../screens/PostScreen";
 import {THEME} from "../theme";
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import Ionicons from "@expo/vector-icons/Ionicons";
+import {AboutScreen} from "../screens/AboutScreen";
+import {CreateScreen} from "../screens/CreateScreen";
 
 const HomeStack = createNativeStackNavigator();
 const PostsStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
 
 function PostsStackScreen ( ) {
   return (
@@ -47,6 +50,30 @@ function  HomeStackScreen ( ) {
   );
 }
 
+function AboutStackScreen ( ) {
+  return (
+      <HomeStack.Navigator initialRouteName="About" screenOptions={headerStyle}>
+        <HomeStack.Screen
+            name="About Stack"
+            component={AboutScreen}
+            options={{title: "About"}}
+        />
+      </HomeStack.Navigator>
+  );
+}
+
+function CreateStackScreen ( ) {
+  return (
+      <HomeStack.Navigator initialRouteName="Create" screenOptions={headerStyle}>
+        <HomeStack.Screen
+            name="Create Stack"
+            component={CreateScreen}
+            options={{title: "Create a post"}}
+        />
+      </HomeStack.Navigator>
+  );
+}
+
 function  TabNavigator ( ) {
   return (
       <Tab.Navigator screenOptions={({ route }) => ({
@@ -71,11 +98,32 @@ function  TabNavigator ( ) {
   );
 }
 
+function DrawerNavigator ( ) {
+  return (
+      <Drawer.Navigator
+          initialRouteName="Home"
+          screenOptions={{
+            drawerType: 'front',
+            drawerHideStatusBarOnOpen: true,
+            headerShown: false,
+            drawerActiveTintColor: THEME.MAIN_COLOR,
+            drawerLabelStyle: {fontFamily: 'open-sans-regular'},
+          }}
+      >
+        <Drawer.Screen
+            name="Main"
+            component={TabNavigator}
+        />
+        <Drawer.Screen name="About" component={AboutStackScreen} />
+        <Drawer.Screen name="Create" component={CreateStackScreen} />
+      </Drawer.Navigator>
+  );
+}
 
 export const AppNavigation = () => {
   return  (
       <NavigationContainer>
-        <TabNavigator />
+        <DrawerNavigator />
       </NavigationContainer>
   )
 }

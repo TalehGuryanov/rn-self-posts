@@ -17,7 +17,7 @@ export const BookedScreen = ({navigation}) => {
     navigation.setOptions({
       headerLeft: () => (
           <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-            <Item title="Toggle drawer" iconName="ios-menu" onPress={() => console.log('menu')} style={{marginHorizontal: 0}}/>
+            <Item title="Toggle drawer" iconName="ios-menu" onPress={() => navigation.toggleDrawer()} style={{marginHorizontal: 0}}/>
           </HeaderButtons>),
     });
   }, [])

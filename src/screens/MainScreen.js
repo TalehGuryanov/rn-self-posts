@@ -15,11 +15,11 @@ export const MainScreen = ({navigation}) => {
     navigation.setOptions({
       headerRight: () => (
           <HeaderButtons HeaderButtonComponent={AppHeaderIcon} style={{marginHorizontal: 0}}>
-            <Item title="Take photo" iconName="ios-camera" onPress={() => console.log('Press photo')} style={{marginHorizontal: 0}}/>
+            <Item title="Take photo" iconName="ios-camera" onPress={() => navigation.navigate('Create Stack')} style={{marginHorizontal: 0}}/>
           </HeaderButtons>),
       headerLeft: () => (
           <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-            <Item title="Toggle drawer" iconName="ios-menu" onPress={() => console.log('menu')} style={{marginHorizontal: 0}}/>
+            <Item title="Toggle drawer" iconName="ios-menu" onPress={() => navigation.toggleDrawer()} style={{marginHorizontal: 0}}/>
           </HeaderButtons>),
     });
   }, [])
