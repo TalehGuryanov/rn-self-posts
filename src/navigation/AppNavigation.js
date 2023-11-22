@@ -11,17 +11,19 @@ import {AboutScreen} from "../screens/AboutScreen";
 import {CreateScreen} from "../screens/CreateScreen";
 
 const HomeStack = createNativeStackNavigator();
+const CreateStack = createNativeStackNavigator();
+const AboutStack = createNativeStackNavigator();
 const PostsStack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 const Drawer = createDrawerNavigator();
 
-function PostsStackScreen ( ) {
+function PostNavigator ( ) {
   return (
       <PostsStack.Navigator initialRouteName="Booked Stack" screenOptions={headerStyle}>
         <PostsStack.Screen
-            name="Booked Stack"
-            component={BookedScreen}
-            options={{title: "Booked"}}
+            name="Main"
+            component={MainScreen}
+            options={{title: "Main"}}
         />
         <PostsStack.Screen
             name="Post"
@@ -32,14 +34,13 @@ function PostsStackScreen ( ) {
   );
 }
 
-function  HomeStackScreen ( ) {
+function BookedNavigator ( ) {
   return (
-      <HomeStack.Navigator initialRouteName="Main" screenOptions={headerStyle}>
+      <HomeStack.Navigator screenOptions={headerStyle}>
         <HomeStack.Screen
-            initialRouteName="Main"
-            name="Main"
-            component={MainScreen}
-            options={{title: "Main"}}
+            name="Booked Posts"
+            component={BookedScreen}
+            options={{title: "Booked"}}
         />
         <HomeStack.Screen
             name="Post"
@@ -50,31 +51,31 @@ function  HomeStackScreen ( ) {
   );
 }
 
-function AboutStackScreen ( ) {
+function AboutNavigator ( ) {
   return (
-      <HomeStack.Navigator initialRouteName="About" screenOptions={headerStyle}>
-        <HomeStack.Screen
+      <AboutStack.Navigator initialRouteName="About" screenOptions={headerStyle}>
+        <AboutStack.Screen
             name="About Stack"
             component={AboutScreen}
             options={{title: "About"}}
         />
-      </HomeStack.Navigator>
+      </AboutStack.Navigator>
   );
 }
 
-function CreateStackScreen ( ) {
+function CreateNavigator ( ) {
   return (
-      <HomeStack.Navigator initialRouteName="Create" screenOptions={headerStyle}>
-        <HomeStack.Screen
+      <CreateStack.Navigator initialRouteName="Create" screenOptions={headerStyle}>
+        <CreateStack.Screen
             name="Create Stack"
             component={CreateScreen}
             options={{title: "Create a post"}}
         />
-      </HomeStack.Navigator>
+      </CreateStack.Navigator>
   );
 }
 
-function  TabNavigator ( ) {
+function BottomTabNavigator ( ) {
   return (
       <Tab.Navigator screenOptions={({ route }) => ({
         headerShown: false,
@@ -92,8 +93,8 @@ function  TabNavigator ( ) {
         })}
         initialRouteName="Home"
       >
-        <Tab.Screen name="Home" component={HomeStackScreen} />
-        <Tab.Screen name="Booked" component={PostsStackScreen} />
+        <Tab.Screen name="Home" component={PostNavigator} />
+        <Tab.Screen name="Booked" component={BookedNavigator} />
       </Tab.Navigator>
   );
 }
@@ -112,10 +113,10 @@ function DrawerNavigator ( ) {
       >
         <Drawer.Screen
             name="Main"
-            component={TabNavigator}
+            component={BottomTabNavigator}
         />
-        <Drawer.Screen name="About" component={AboutStackScreen} />
-        <Drawer.Screen name="Create" component={CreateStackScreen} />
+        <Drawer.Screen name="About" component={AboutNavigator} />
+        <Drawer.Screen name="Create" component={CreateNavigator} />
       </Drawer.Navigator>
   );
 }
