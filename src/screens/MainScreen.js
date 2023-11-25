@@ -23,7 +23,7 @@ export const MainScreen = ({navigation}) => {
     navigation.setOptions({
       headerRight: () => (
           <HeaderButtons HeaderButtonComponent={AppHeaderIcon} style={{marginHorizontal: 0}}>
-            <Item title="Take photo" iconName="ios-camera" onPress={() => navigation.navigate('Create Stack')} style={{marginHorizontal: 0}}/>
+            <Item title="Take photo" iconName="ios-camera" onPress={() => navigation.navigate('Create')} style={{marginHorizontal: 0}}/>
           </HeaderButtons>),
       headerLeft: () => (
           <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>

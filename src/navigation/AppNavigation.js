@@ -65,7 +65,7 @@ function AboutNavigator ( ) {
 
 function CreateNavigator ( ) {
   return (
-      <CreateStack.Navigator initialRouteName="Create" screenOptions={headerStyle}>
+      <CreateStack.Navigator screenOptions={headerStyle}>
         <CreateStack.Screen
             name="Create Stack"
             component={CreateScreen}
