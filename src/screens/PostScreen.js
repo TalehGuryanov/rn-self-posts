@@ -4,7 +4,7 @@ import React, {useLayoutEffect, useMemo} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
-import {toggleBookedActionCreator} from "../store/actions/postAction";
+import {removePostActionCreator, toggleBookedActionCreator} from "../store/actions/postAction";
 
 export const PostScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ export const PostScreen = ({ route, navigation }) => {
   
   useLayoutEffect(() => {
     const iconName = isBooked ? 'ios-star' : 'ios-star-outline'
+    
     navigation.setOptions({
       headerRight: () => (
           <HeaderButtons HeaderButtonComponent={AppHeaderIcon} style={{marginHorizontal: 0}}>
@@ -35,10 +36,20 @@ export const PostScreen = ({ route, navigation }) => {
             text: "Cancel",
             style: "cancel"
           },
-          { text: "Delete", style: 'destructive', onPress: () => {} }
+          { text: "Delete",
+            style: 'destructive',
+            onPress: () => {
+              navigation.navigate('Main');
+              dispatch(removePostActionCreator(postId));
+            }
+          }
         ],
         { cancelable: false }
     )
+  }
+  
+  if(!selectedPost) {
+    return null;
   }
   
   return (
