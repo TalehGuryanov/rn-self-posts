@@ -1,17 +1,16 @@
-import {DATA} from "../data";
 import {Post} from "../components/Post";
-import React, {useMemo} from "react";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
 import { useLayoutEffect } from 'react';
 import {PostList} from "../components/PostList";
+import {useSelector} from "react-redux";
 
 export const BookedScreen = ({navigation}) => {
+  const bookedPosts = useSelector(state => state.posts.bookedPosts);
+
   const openPostHandler = post => {
     navigation.navigate('Post', {postId: post.id})
   }
-  
-  const filteredData = useMemo(() => DATA.filter(post => post.booked), [DATA])
   
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -23,6 +22,6 @@ export const BookedScreen = ({navigation}) => {
   }, [])
   
   return (
-      filteredData && <PostList onOpen={openPostHandler} data={filteredData}/>
+      bookedPosts && <PostList onOpen={openPostHandler} data={bookedPosts}/>
   )
 }

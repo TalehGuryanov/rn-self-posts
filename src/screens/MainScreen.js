@@ -1,15 +1,23 @@
-import {DATA} from "../data";
 import {Post} from "../components/Post";
-import React from "react";
+import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
 import { useLayoutEffect } from 'react';
 import {PostList} from "../components/PostList";
+import {loadPostsActionCreator} from "../store/actions/postAction";
 
 export const MainScreen = ({navigation}) => {
+  const allPosts = useSelector(state => state.posts.allPosts);
+  const dispatch = useDispatch();
+  
   const openPostHandler = post => {
     navigation.navigate('Post', {postId: post.id})
   }
+  
+  useEffect(() => {
+    dispatch(loadPostsActionCreator())
+  }, [dispatch])
   
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -25,6 +33,6 @@ export const MainScreen = ({navigation}) => {
   }, [])
   
   return (
-      <PostList onOpen={openPostHandler} data={DATA}/>
+      <PostList onOpen={openPostHandler} data={allPosts}/>
   )
 }

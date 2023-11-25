@@ -4,6 +4,8 @@ import { useCallback } from "react";
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import {AppNavigation} from "./src/navigation/AppNavigation";
+import {Provider} from 'react-redux'
+import {store} from "./src/store";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -24,9 +26,11 @@ export default function App() {
   }
   
   return (
-    <View onLayout={onLayoutRootView} style={styles.container}>
-      <AppNavigation/>
-    </View>
+      <Provider store={store}>
+        <View onLayout={onLayoutRootView} style={styles.container}>
+          <AppNavigation/>
+        </View>
+      </Provider>
   );
 }
 
