@@ -1,17 +1,30 @@
 import { Text, View, StyleSheet, Image, Button, ScrollView, Alert } from 'react-native';
-import {DATA} from "../data";
 import {THEME} from "../theme";
-import React, {useLayoutEffect, useCallback} from "react";
+import React, {useLayoutEffect, useMemo} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
+import {toggleBookedActionCreator} from "../store/actions/postAction";
 
 export const PostScreen = ({ route, navigation }) => {
+  const dispatch = useDispatch();
   const {postId} = route.params;
+  const selectedPost = useSelector(state => state.posts.allPosts.find(p => p.id === postId));
+  const isBooked = useSelector(state => state.posts.bookedPosts.some(post => post.id === postId));
   
-  const findPost = useCallback(() => {
-    return DATA.find(p => p.id === postId)
-  }, [postId]);
-  const post = findPost();
+  useLayoutEffect(() => {
+    const iconName = isBooked ? 'ios-star' : 'ios-star-outline'
+    navigation.setOptions({
+      headerRight: () => (
+          <HeaderButtons HeaderButtonComponent={AppHeaderIcon} style={{marginHorizontal: 0}}>
+            <Item title="Save as booked"
+                  iconName={iconName}
+                  onPress={() => dispatch(toggleBookedActionCreator(postId))}
+                  style={{marginHorizontal: 0}}
+            />
+          </HeaderButtons>),
+    });
+  }, [dispatch, isBooked]);
   
   const removeHandler = () => {
     Alert.alert(
@@ -28,24 +41,13 @@ export const PostScreen = ({ route, navigation }) => {
     )
   }
   
-  useLayoutEffect(() => {
-    const isBooker = post.booked;
-    const iconName = isBooker ? 'ios-star' : 'ios-star-outline'
-    navigation.setOptions({
-      headerRight: () => (
-          <HeaderButtons HeaderButtonComponent={AppHeaderIcon} style={{marginHorizontal: 0}}>
-            <Item title="Take photo" iconName={iconName} onPress={() => console.log('booked')} style={{marginHorizontal: 0}}/>
-          </HeaderButtons>),
-    });
-  }, [])
-  
   return (
       <ScrollView style={styles.center}>
-        <Image source={{uri: post.img}} style={styles.image}/>
+        <Image source={{uri: selectedPost.img}} style={styles.image}/>
         
         <View style={styles.textWrapper}>
           <Text stye={styles.title}>
-            {post.text}
+            {selectedPost.text}
           </Text>
         </View>
         
