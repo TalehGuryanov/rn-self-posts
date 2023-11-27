@@ -6,9 +6,12 @@ import {AppHeaderIcon} from "../components/AppHeaderIcon";
 import { useLayoutEffect } from 'react';
 import {PostList} from "../components/PostList";
 import {loadPostsActionCreator} from "../store/actions/postAction";
+import {View, Text, StyleSheet, ActivityIndicator} from "react-native";
+import {THEME} from "../theme";
 
 export const MainScreen = ({navigation}) => {
   const allPosts = useSelector(state => state.posts.allPosts);
+  const loading = useSelector(state => state.posts.loading);
   const dispatch = useDispatch();
   
   const openPostHandler = post => {
@@ -32,7 +35,21 @@ export const MainScreen = ({navigation}) => {
     });
   }, [])
   
+  if(loading) {
+    return <View style={styles.center}>
+      <ActivityIndicator color={THEME.MAIN_COLOR}/>
+    </View>;
+  }
+  
   return (
       <PostList onOpen={openPostHandler} data={allPosts}/>
   )
 }
+
+const styles = StyleSheet.create({
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});
