@@ -1,6 +1,6 @@
 import { Text, View, StyleSheet, Image, Button, ScrollView, Alert } from 'react-native';
 import {THEME} from "../theme";
-import React, {useLayoutEffect, useMemo} from "react";
+import React, {useLayoutEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {AppHeaderIcon} from "../components/AppHeaderIcon";
@@ -20,12 +20,12 @@ export const PostScreen = ({ route, navigation }) => {
           <HeaderButtons HeaderButtonComponent={AppHeaderIcon} style={{marginHorizontal: 0}}>
             <Item title="Save as booked"
                   iconName={iconName}
-                  onPress={() => dispatch(toggleBookedActionCreator(postId))}
+                  onPress={() => dispatch(toggleBookedActionCreator(selectedPost))}
                   style={{marginHorizontal: 0}}
             />
           </HeaderButtons>),
     });
-  }, [dispatch, isBooked]);
+  }, [dispatch, isBooked, selectedPost]);
   
   const removeHandler = () => {
     Alert.alert(
