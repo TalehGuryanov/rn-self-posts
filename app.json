@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "rf-self-posts",
+    "name": "Self Blog",
     "slug": "rf-self-posts",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/rn-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "image": "./assets/rn-splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#242832"
     },
     "assetBundlePatterns": [
       "**/*"
