@@ -19,7 +19,9 @@
       "infoPlist": {
         "NSCameraUsageDescription": "This app uses the camera to create a new post",
         "NSPhotoLibraryUsageDescription": "This app uses the camera to create a new post"
-      }
+      },
+      "bundleIdentifier": "com.taleh.rfselfposts",
+      "buildNumber": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
@@ -31,7 +33,9 @@
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "package": "com.taleh.rfselfposts",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
